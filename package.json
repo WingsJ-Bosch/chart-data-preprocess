@@ -1,0 +1,19 @@
+{
+  "name": "plot-ready",
+  "version": "0.0.0",
+  "description": "Tools for preprocessing data for plotting.",
+  "license": "MIT",
+  "author": "WingsJ",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsup --watch",
+    "test": "vitest",
+    "build": "tsup"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.6"
+  }
+}

@@ -1,18 +1,22 @@
 /**
- * Fix
+ * Parse
  * @param [value] Value
  * @return Number
  */
-function fix(value: any): number {
+function parse(value: any): number {
   if (value == null || value === undefined || value === '') {
     return 0;
   } else if (typeof value === 'number') {
     return value;
   } else if (typeof value === 'string') {
-    return Number.parseFloat(value);
+    if (value.endsWith('%')) {
+      return Number.parseFloat(value) / 100;
+    } else {
+      return Number.parseFloat(value);
+    }
   } else {
     return NaN;
   }
 }
 
-export { fix };
+export { parse };

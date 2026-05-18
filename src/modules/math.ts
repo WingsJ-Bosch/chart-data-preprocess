@@ -20,8 +20,8 @@ function max(array: number[]): number {
  * @return Min Value and Max Value
  */
 function minMax(array: number[]): [number, number] {
-  let min = -Infinity;
-  let max = Infinity;
+  let min = Infinity;
+  let max = -Infinity;
 
   for (let a of array) {
     if (a < min) {
@@ -39,7 +39,7 @@ function minMax(array: number[]): [number, number] {
  * @param [array] Array
  * @return Value
  */
-function sum(array: number[]) {
+function sum(array: number[]): number {
   return array.reduce((p, c) => p + c, 0);
 }
 /**

@@ -1,14 +1,13 @@
 import type { Vector2, Vector2Array } from '../../types/vector-array';
 
 /**
- * Downsample
- * @description Largest triangle three buckets.
+ * Largest Triangle Three Buckets
  * @type [T] Origin Type
  * @param [array] Origin Array
  * @param [length] Target Length
  * @return Downsampled Array
  */
-function downsample<T extends Vector2 = any>(array: Vector2Array<T>, length: number) {
+function largestTriangleThreeBuckets<T extends Vector2 = any>(array: Vector2Array<T>, length: number) {
   if (array.length <= length || array.length <= 3) {
     return Array.from(array);
   } else {
@@ -62,4 +61,4 @@ function downsample<T extends Vector2 = any>(array: Vector2Array<T>, length: num
   }
 }
 
-export { downsample };
+export { largestTriangleThreeBuckets };

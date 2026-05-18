@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { downsample } from '../../src';
+import { largestTriangleThreeBuckets } from '../../src';
 
 describe('downsample', () => {
   it('$', () => {
-    let r = downsample(
+    let r = largestTriangleThreeBuckets(
       [
         { x: 1, y: 2 },
         { x: 2, y: 2 },

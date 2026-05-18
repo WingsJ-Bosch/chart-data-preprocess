@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "tsup --watch",
     "test": "vitest",
-    "build": "tsup"
+    "build": "tsup",
+    "release": "npm publish --access public"
   },
   "devDependencies": {
     "tsup": "^8.5.1",

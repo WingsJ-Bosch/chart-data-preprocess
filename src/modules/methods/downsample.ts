@@ -1,17 +1,57 @@
 import type { Vector2, Vector2Array } from '../../types/vector-array';
 
 /**
+ * Cursor Compress
+ * @type [T] Origin Type
+ * @param [array] Array
+ * @return Unique Array
+ */
+function cursorCompress<T = any>(array: T[], identifiers?: ((item: T) => any)[]): T[] {
+  if (array.length > 2) {
+    let temp = [array[0]!];
+    let last = temp[0]!;
+    for (let i = 1; i < array.length - 1; i++) {
+      let current = array[i]!;
+
+      if (identifiers?.length) {
+        let unique = false;
+        for (let a of identifiers) {
+          if (a(current) !== a(last)) {
+            unique = true;
+
+            break;
+          }
+        }
+        if (unique) {
+          temp.push(current);
+          last = current;
+        }
+      } else {
+        if (current !== last) {
+          temp.push(current);
+          last = current;
+        }
+      }
+    }
+    temp.push(array.at(-1)!);
+
+    return temp;
+  } else {
+    return Array.from(array);
+  }
+}
+/**
  * Largest Triangle Three Buckets
  * @type [T] Origin Type
  * @param [array] Origin Array
  * @param [length] Target Length
  * @return Downsampled Array
  */
-function largestTriangleThreeBuckets<T extends Vector2 = any>(array: Vector2Array<T>, length: number) {
+function largestTriangleThreeBuckets<T extends Vector2 = any>(array: Vector2Array<T>, length: number): T[] {
   if (array.length <= length || array.length <= 3) {
     return Array.from(array);
   } else {
-    let temp = [array.at(0)]; // Include first point.
+    let temp = [array.at(0)!]; // Include first point.
     let batch = (array.length - 2) / (length - 2); // Bucket size.
 
     let currentPoint = array.at(0)!; // Starting reference point.
@@ -55,10 +95,10 @@ function largestTriangleThreeBuckets<T extends Vector2 = any>(array: Vector2Arra
       currentPoint = maxAreaPoint; // Advance reference point.
     }
 
-    temp.push(array.at(-1));
+    temp.push(array.at(-1)!);
 
     return temp;
   }
 }
 
-export { largestTriangleThreeBuckets };
+export { cursorCompress, largestTriangleThreeBuckets };

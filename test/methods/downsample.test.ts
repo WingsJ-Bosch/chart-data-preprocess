@@ -1,7 +1,27 @@
 import { describe, expect, it } from 'vitest';
-import { largestTriangleThreeBuckets } from '../../src';
+import { cursorCompress, largestTriangleThreeBuckets } from '../../src';
 
-// TODO cursorCompress
+describe('cursorCompress', () => {
+  it('$', () => {
+    let r = cursorCompress(
+      [
+        { x: 1, y: 1, value: 'a' },
+        { x: 2, y: 1, value: 'b' },
+        { x: 3, y: 1, value: 'c' },
+        { x: 4, y: 2, value: 'd' },
+        { x: 5, y: 2, value: 'e' },
+        { x: 6, y: 2, value: 'f' }
+      ],
+      [a => a.y]
+    );
+
+    expect(r).toEqual([
+      { x: 1, y: 1, value: 'a' },
+      { x: 4, y: 2, value: 'd' },
+      { x: 6, y: 2, value: 'f' }
+    ]);
+  });
+});
 
 describe('largestTriangleThreeBuckets', () => {
   it('$', () => {

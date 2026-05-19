@@ -2,6 +2,7 @@ import type { Vector2, Vector2Array } from '../../types/vector-array';
 
 /**
  * Cursor Compress
+ * @description Compresses the input array by removing consecutive duplicate entries while preserving order.
  * @type [T] Origin Type
  * @param [array] Array
  * @return Unique Array
@@ -42,6 +43,7 @@ function cursorCompress<T = any>(array: T[], identifiers?: ((item: T) => any)[])
 }
 /**
  * Largest Triangle Three Buckets
+ * @description Downsamples the input vector array to the requested length using the largest-triangle-three-buckets algorithm.
  * @type [T] Origin Type
  * @param [array] Origin Array
  * @param [length] Target Length

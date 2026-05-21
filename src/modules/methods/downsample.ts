@@ -1,13 +1,13 @@
-import type { Vector2, Vector2Array } from '../../types/vector-array';
+import type { Vector1, Vector2 } from '../../types/vector-array';
 
 /**
- * Cursor Compress
+ * Consecutive Duplicate Compress
  * @description Compresses the input array by removing consecutive duplicate entries while preserving order.
  * @type [T] Origin Type
  * @param [array] Array
- * @return Unique Array
+ * @return Downsampled Array
  */
-function cursorCompress<T = any>(array: T[], identifiers?: ((item: T) => any)[]): T[] {
+function consecutiveDuplicateCompress<T = any>(array: T[], identifiers?: ((item: T) => any)[]): T[] {
   if (array.length > 2) {
     let temp = [array[0]!];
     let last = temp[0]!;
@@ -41,15 +41,56 @@ function cursorCompress<T = any>(array: T[], identifiers?: ((item: T) => any)[])
     return Array.from(array);
   }
 }
+
 /**
- * Largest Triangle Three Buckets
- * @description Downsamples the input vector array to the requested length using the largest-triangle-three-buckets algorithm.
+ * Distance Threshold Compress
+ * @description Compresses the input vector array by removing points whose x-distance to the previous kept point is within the given unit threshold.
+ * @type [T] Data Type
+ * @param [array] Data Array
+ * @param [unit] Unit Size
+ * @returns Downsampled Array
+ */
+function distanceThresholdCompress<T extends Vector1 = any>(array: T[], unit: number): T[] {
+  if (array.length > 2) {
+    let temp = Array.from(array) as (T | undefined)[];
+
+    const getPrevious = (start: number) => {
+      let index = start;
+      let current: T | undefined = undefined;
+      while (current === undefined && index >= 0) {
+        current = temp[index];
+        index--;
+      }
+
+      return current;
+    };
+
+    let previous = getPrevious(0)!;
+    for (let i = 1; i < array.length - 1; i++) {
+      let next = array[i + 1];
+      if (next) {
+        if (next.x - previous.x <= unit) {
+          temp[i] = undefined;
+        }
+        previous = getPrevious(i)!;
+      }
+    }
+
+    return temp.filter(a => a !== undefined);
+  } else {
+    return Array.from(array);
+  }
+}
+
+/**
+ * Largest Triangle Three Buckets Compress
+ * @description Downsamples the input vector array to the requested length using the largest-triangle-three-buckets (LTTB) algorithm.
  * @type [T] Origin Type
  * @param [array] Origin Array
  * @param [length] Target Length
  * @return Downsampled Array
  */
-function largestTriangleThreeBuckets<T extends Vector2 = any>(array: Vector2Array<T>, length: number): T[] {
+function largestTriangleThreeBucketsCompress<T extends Vector2 = any>(array: T[], length: number): T[] {
   if (array.length <= length || array.length <= 3) {
     return Array.from(array);
   } else {
@@ -103,4 +144,4 @@ function largestTriangleThreeBuckets<T extends Vector2 = any>(array: Vector2Arra
   }
 }
 
-export { cursorCompress, largestTriangleThreeBuckets };
+export { consecutiveDuplicateCompress, distanceThresholdCompress, largestTriangleThreeBucketsCompress };

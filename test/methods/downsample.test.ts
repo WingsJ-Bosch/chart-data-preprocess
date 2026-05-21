@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { cursorCompress, largestTriangleThreeBuckets } from '../../src';
+import { consecutiveDuplicateCompress, distanceThresholdCompress, largestTriangleThreeBucketsCompress } from '../../src';
 
-describe('cursorCompress', () => {
+describe('consecutiveDuplicateCompress', () => {
   it('$', () => {
-    let r = cursorCompress(
+    let r = consecutiveDuplicateCompress(
       [
         { x: 1, y: 1, value: 'a' },
         { x: 2, y: 1, value: 'b' },
@@ -22,10 +22,30 @@ describe('cursorCompress', () => {
     ]);
   });
 });
-
-describe('largestTriangleThreeBuckets', () => {
+describe('distanceThresholdCompress', () => {
   it('$', () => {
-    let r = largestTriangleThreeBuckets(
+    let r = distanceThresholdCompress(
+      [
+        { x: 1, y: 0, value: 'a' },
+        { x: 2, y: 0, value: 'b' },
+        { x: 3, y: 0, value: 'c' },
+        { x: 6, y: 0, value: 'd' },
+        { x: 9, y: 0, value: 'e' }
+      ],
+      2
+    );
+
+    expect(r).toEqual([
+      { x: 1, y: 0, value: 'a' },
+      { x: 3, y: 0, value: 'c' },
+      { x: 6, y: 0, value: 'd' },
+      { x: 9, y: 0, value: 'e' }
+    ]);
+  });
+});
+describe('largestTriangleThreeBucketsCompress', () => {
+  it('$', () => {
+    let r = largestTriangleThreeBucketsCompress(
       [
         { x: 1, y: 2, value: 'a' },
         { x: 2, y: 2, value: 'b' },

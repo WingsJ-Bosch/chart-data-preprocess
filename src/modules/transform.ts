@@ -1,4 +1,4 @@
-import type { Vector1, Vector1Array } from '../types/vector-array';
+import type { Vector1 } from '../types/vector-array';
 import { sum } from './math';
 
 /**
@@ -7,10 +7,10 @@ import { sum } from './math';
  * @param [array] Array
  * @return Array with X Ratio
  */
-function ratio<T extends Vector1 = any>(array: Vector1Array<T>) {
+function ratio<T extends Vector1 = any>(array: T[]): T[] {
   let total = sum(array.map(a => a.x));
 
-  return array.map(a => ({ x: a.x / total }));
+  return array.map(a => ({ ...a, x: a.x / total }));
 }
 
 export { ratio };

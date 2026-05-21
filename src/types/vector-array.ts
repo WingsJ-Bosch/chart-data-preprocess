@@ -12,7 +12,4 @@ interface Vector2 {
   y: number;
 }
 
-type Vector1Array<T extends Vector1 = any> = T[];
-type Vector2Array<T extends Vector2 = any> = T[];
-
-export type { Vector1, Vector1Array, Vector2, Vector2Array };
+export type { Vector1, Vector2 };
